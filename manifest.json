@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "TrackMark",
+  "version": "1.0.0",
+  "description": "Loop segments with precision, tune audio with a 6-band graphic equalizer & genre presets, and boost volume up to 600% on YouTube.",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "*://*.youtube.com/*"
+  ],
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_title": "TrackMark",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "content/index.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
