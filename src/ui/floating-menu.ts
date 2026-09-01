@@ -797,7 +797,6 @@ export class FloatingMenu {
           return;
         }
         await this.stateManager.selectTrack(trackId, true);
-        await this.stateManager.setLoop(true);
       });
     });
 
