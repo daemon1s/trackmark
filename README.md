@@ -30,6 +30,7 @@
 
 - ⚡ **Precision Track Looping**: Seamless, zero-gap looping with timestamp precision directly inside YouTube's HTML5 player.
 - 🎛️ **6-Band Graphic Equalizer**: Web Audio API cascade (60Hz, 150Hz, 400Hz, 1kHz, 2.4kHz, 15kHz) with built-in presets (Bass Boost, EDM, Rock, Pop, Hip-Hop, Vocal Clarity) that persist globally across videos.
+- 🔊 **Volume Booster**: Amplify audio up to 600% above YouTube's native maximum with a clipping limiter, with quick presets (100% - 600%) that persist globally.
 - 📋 **1-Click Auto-Detect Tracklist**: Extracts all song titles and timestamps from video descriptions and top comments automatically.
 - 📌 **Interactive Timeline Markers**: Visual markers and active loop highlights overlaid directly on the native YouTube progress bar.
 - 🔍 **Quick Search Integrations**: Direct YouTube and SoundCloud search buttons next to every song timestamp without restarting playback.
@@ -42,7 +43,7 @@
 
 ### Option 1: Download Release (.ZIP)
 
-1. Download the latest **`TrackMark-v1.0.0.zip`** from [Releases](https://github.com/daemon1s/trackmark/releases).
+1. Download the latest **`TrackMark-v1.1.0.zip`** from [Releases](https://github.com/daemon1s/trackmark/releases).
 2. Extract the `.zip` file into a folder on your PC.
 3. In Google Chrome, go to `chrome://extensions/`.
 4. Turn on the **Developer mode** toggle in the top-right corner.
