@@ -249,6 +249,37 @@ export class FloatingMenu {
               </div>
             </div>
           </div>
+
+          <div class="tm-boost-section">
+            <div class="tm-section-header">
+              <div class="tm-title-with-info">
+                <span class="tm-boost-label">🔊 Volume Booster</span>
+                <div class="tm-info-tooltip-wrap">
+                  <span class="tm-info-icon">ℹ️</span>
+                  <div class="tm-tooltip-content">
+                    <strong>¿Cómo funciona el Volume Booster?</strong><br/>
+                    • <strong>100% - 600%:</strong> Amplifica el volumen por encima del máximo nativo de YouTube.<br/>
+                    • <strong>Compresor limitador:</strong> Previene clipping (distorsión) al subir la ganancia.<br/>
+                    Activa el booster y elige un nivel con los botones rápidos.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tm-boost-controls">
+              <button class="tm-btn-preset" data-boost="1">100%</button>
+              <button class="tm-btn-preset" data-boost="1.5">150%</button>
+              <button class="tm-btn-preset" data-boost="2">200%</button>
+              <button class="tm-btn-preset" data-boost="3">300%</button>
+              <button class="tm-btn-preset" data-boost="4">400%</button>
+              <button class="tm-btn-preset" data-boost="6">600%</button>
+            </div>
+
+            <div class="tm-boost-status">
+              <span class="tm-boost-value-label" id="tm-boost-val-label">100% (OFF)</span>
+              <button class="tm-btn-toggle-boost" id="tm-boost-toggle">ENABLE BOOST</button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -449,6 +480,22 @@ export class FloatingMenu {
       });
     });
 
+    this.menuEl.querySelectorAll('.tm-btn-preset').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (videoEl) booster.init(videoEl);
+        const multiplier = Number((btn as HTMLElement).dataset.boost);
+        booster.setBoost(multiplier);
+        booster.setEnabled(true);
+        this.updateBoostUI();
+      });
+    });
+
+    this.menuEl.querySelector('#tm-boost-toggle')?.addEventListener('click', () => {
+      if (videoEl) booster.init(videoEl);
+      booster.setEnabled(!booster.getIsEnabled());
+      this.updateBoostUI();
+    });
+
 
     this.menuEl.querySelector('#tm-scan-btn')?.addEventListener('click', () => {
       this.handleAutoScan();
@@ -502,6 +549,7 @@ export class FloatingMenu {
     });
 
     this.updateEqUI();
+    this.updateBoostUI();
   }
 
   private updateEqUI(): void {
@@ -537,6 +585,12 @@ export class FloatingMenu {
     const label = this.menuEl.querySelector('#tm-boost-val-label');
     if (label) {
       label.textContent = enabled ? `${percent}%` : '100% (OFF)';
+    }
+
+    const toggle = this.menuEl.querySelector('#tm-boost-toggle') as HTMLButtonElement;
+    if (toggle) {
+      toggle.textContent = enabled ? 'DISABLE BOOST' : 'ENABLE BOOST';
+      toggle.classList.toggle('active', enabled);
     }
 
     this.menuEl.querySelectorAll('.tm-btn-preset').forEach(btn => {

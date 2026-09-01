@@ -814,6 +814,85 @@ button, input, select, textarea {
   color: #a1a1aa;
 }
 
+.tm-boost-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #16161d;
+  border: 1px solid #23232f;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.tm-boost-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.tm-btn-preset {
+  background: #1f1f2a;
+  border: 1px solid #2d2d3b;
+  color: #a1a1aa;
+  border-radius: 4px;
+  padding: 6px 0;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.12s;
+}
+
+.tm-btn-preset:hover {
+  color: #05ffa1;
+  border-color: #05ffa1;
+}
+
+.tm-btn-preset.active {
+  background: #05ffa1;
+  color: #000;
+  border-color: #05ffa1;
+  box-shadow: 0 0 8px rgba(5, 255, 161, 0.35);
+}
+
+.tm-boost-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.tm-boost-value-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #05ffa1;
+  font-family: monospace;
+}
+
+.tm-btn-toggle-boost {
+  background: #1f1f2a;
+  border: 1px solid #2d2d3b;
+  color: #00f0ff;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 9.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.12s;
+  text-transform: uppercase;
+}
+
+.tm-btn-toggle-boost:hover {
+  background: #00f0ff;
+  color: #000;
+}
+
+.tm-btn-toggle-boost.active {
+  background: #00f0ff;
+  color: #000;
+  border-color: #00f0ff;
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.35);
+}
+
 .tm-tools-panel {
   padding: 14px;
   display: flex;

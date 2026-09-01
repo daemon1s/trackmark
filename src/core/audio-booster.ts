@@ -66,6 +66,16 @@ export class AudioBooster {
 
   constructor() {
     this.loadSavedEq();
+    this.loadSavedBoost();
+  }
+
+  private async loadSavedBoost(): Promise<void> {
+    const saved = await StorageManager.getBoostSettings();
+    if (saved) {
+      this.boostMultiplier = saved.multiplier;
+      this.isBoostEnabled = saved.enabled;
+      this.applySettings();
+    }
   }
 
   private async loadSavedEq(): Promise<void> {
@@ -132,6 +142,10 @@ export class AudioBooster {
   public setBoost(multiplier: number): void {
     this.boostMultiplier = Math.max(1.0, Math.min(6.0, multiplier));
     this.applySettings();
+    StorageManager.saveBoostSettings({
+      multiplier: this.boostMultiplier,
+      enabled: this.isBoostEnabled
+    });
   }
 
   public setEnabled(enabled: boolean): void {
@@ -140,6 +154,10 @@ export class AudioBooster {
       this.audioCtx.resume().catch(() => {});
     }
     this.applySettings();
+    StorageManager.saveBoostSettings({
+      multiplier: this.boostMultiplier,
+      enabled: this.isBoostEnabled
+    });
   }
 
   public getBoost(): number {
