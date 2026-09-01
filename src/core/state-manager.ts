@@ -39,6 +39,7 @@ export class StateManager {
 
     this.videoController.subscribe((controllerState) => {
       this.autoSyncActiveTrack(controllerState.currentTime);
+      this.syncLoopPersistence(controllerState.isLoopActive);
       this.notify();
     });
   }
@@ -90,6 +91,14 @@ export class StateManager {
     if (currentTrack && currentTrack.id !== this.currentVideoData.activeTrackId) {
       this.currentVideoData.activeTrackId = currentTrack.id;
       this.videoController.setActiveTrack(currentTrack);
+    }
+  }
+
+  private syncLoopPersistence(controllerLoop: boolean): void {
+    if (!this.currentVideoData) return;
+    if (this.currentVideoData.isLoopActive !== controllerLoop) {
+      this.currentVideoData.isLoopActive = controllerLoop;
+      StorageManager.saveVideoData(this.currentVideoData);
     }
   }
 

@@ -152,10 +152,9 @@ export class VideoController {
     const current = this.video.currentTime;
 
     if (this.isLoopActive && this.activeTrack) {
-      if (current < this.activeTrack.startTime - 0.75 || current > this.activeTrack.endTime + 0.75) {
-        console.log(`[TrackMark] User manual seek detected (${current.toFixed(2)}s outside ${this.activeTrack.startTime}s - ${this.activeTrack.endTime}s). Disabling loop.`);
-        this.isLoopActive = false;
-      }
+      console.log(`[TrackMark] User manual seek detected (${current.toFixed(2)}s). Disabling loop.`);
+      this.setLoop(false);
+      return;
     }
 
     this.notifyState();

@@ -89,7 +89,7 @@ export class StorageManager {
     if (!videoData) return null;
     videoData.tracks = [];
     videoData.activeTrackId = null;
-    videoData.updatedAt = Date.now();
+    videoData.lastUpdated = Date.now();
     await this.saveVideoData(videoData);
     return videoData;
   }
@@ -108,6 +108,23 @@ export class StorageManager {
       await chrome.storage.local.set({ '__tm_global_eq': settings });
     } catch (e) {
       console.error('[TrackMark] Error saving EQ settings:', e);
+    }
+  }
+
+  static async getBoostSettings(): Promise<{ multiplier: number; enabled: boolean } | null> {
+    try {
+      const res = await chrome.storage.local.get('__tm_global_boost');
+      return (res['__tm_global_boost'] as { multiplier: number; enabled: boolean }) || null;
+    } catch {
+      return null;
+    }
+  }
+
+  static async saveBoostSettings(settings: { multiplier: number; enabled: boolean }): Promise<void> {
+    try {
+      await chrome.storage.local.set({ '__tm_global_boost': settings });
+    } catch (e) {
+      console.error('[TrackMark] Error saving boost settings:', e);
     }
   }
 }
