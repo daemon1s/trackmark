@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "TrackMark",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Loop segments with precision, tune audio with a 6-band graphic equalizer & genre presets, and boost volume up to 600% on YouTube.",
   "permissions": [
     "storage"

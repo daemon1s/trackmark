@@ -1,6 +1,6 @@
 {
   "name": "trackmark",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "type": "module",
   "description": "Chrome extension for YouTube to loop segments with precision, tune audio with a 6-band graphic equalizer & genre presets, and boost volume up to 600%.",
   "private": true,

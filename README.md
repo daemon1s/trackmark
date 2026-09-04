@@ -43,7 +43,7 @@
 
 ### Option 1: Download Release (.ZIP)
 
-1. Download the latest **`TrackMark-v1.1.0.zip`** from [Releases](https://github.com/daemon1s/trackmark/releases).
+1. Download the latest **`TrackMark-v1.2.0.zip`** from [Releases](https://github.com/daemon1s/trackmark/releases).
 2. Extract the `.zip` file into a folder on your PC.
 3. In Google Chrome, go to `chrome://extensions/`.
 4. Turn on the **Developer mode** toggle in the top-right corner.
