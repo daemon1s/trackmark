@@ -12,8 +12,8 @@
   <img src="https://img.shields.io/badge/Manifest-V3-00f0ff?style=for-the-badge&logo=googlechrome&logoColor=black" alt="Manifest V3" />
   <img src="https://img.shields.io/badge/TypeScript-5.6-3178c6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
   <img src="https://img.shields.io/badge/Audio-Web_Audio_API-05ffa1?style=for-the-badge&logo=soundcharts&logoColor=black" alt="Web Audio API" />
-  <a href="https://www.virustotal.com/gui/file/E9111DD529EC7B55B42D3466AB172DA87579190E24603932815B3560E05A648F" target="_blank">
-    <img src="https://img.shields.io/badge/VirusTotal-Scan-00f0ff?style=for-the-badge&logo=virustotal&logoColor=white" alt="VirusTotal Scan" />
+  <a href="https://www.virustotal.com/gui/file/e08e0c564d0d6f3749656bd3ec066e469b20893558f79b77e1147e0c7386f85c" target="_blank">
+    <img src="https://img.shields.io/badge/VirusTotal-Clean-00f0ff?style=for-the-badge&logo=virustotal&logoColor=white" alt="VirusTotal Clean" />
   </a>
   <img src="https://img.shields.io/badge/License-MIT-ff2a6d?style=for-the-badge" alt="License MIT" />
 </p>
