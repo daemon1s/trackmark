@@ -224,16 +224,16 @@ button, input, select, textarea {
 .tm-tab {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   flex: 1;
-  padding: 6px 0;
+  padding: 5px 2px;
   text-align: center;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   color: #71717a;
   background: transparent;
   border: 1px solid transparent;
   border-radius: 4px;
   cursor: pointer;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   transition: color 0.12s ease, background 0.12s ease, border-color 0.12s ease;
   outline: none;
   white-space: nowrap;
@@ -442,7 +442,6 @@ button, input, select, textarea {
   justify-content: center;
   gap: 6px;
   letter-spacing: 0.5px;
-  text-transform: uppercase;
 }
 
 .tm-btn-primary:hover {
@@ -1066,11 +1065,174 @@ button, input, select, textarea {
   font-weight: 700;
   cursor: pointer;
   transition: all 0.12s;
-  text-transform: uppercase;
 }
 
 .tm-btn-secondary:hover {
   color: #fff;
   background: #272733;
+}
+
+.tm-list-bar {
+  padding: 6px 14px;
+  background: #111116;
+  border-bottom: 1px solid #1a1a24;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tm-list-count {
+  font-size: 10px;
+  font-weight: 700;
+  color: #71717a;
+  letter-spacing: 0.5px;
+}
+
+.tm-btn-filter-fav {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #171722;
+  border: 1px solid #282836;
+  color: #8e8e9f;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 9.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  letter-spacing: 0.3px;
+}
+
+.tm-btn-filter-fav:hover {
+  color: #00f0ff;
+  border-color: #00f0ff;
+  background: #1d1d2b;
+}
+
+.tm-btn-filter-fav.active {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: #00f0ff;
+  color: #00f0ff;
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
+}
+
+.tm-favs-header {
+  padding: 10px 14px;
+  background: #141419;
+  border-bottom: 1px solid #1f1f27;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tm-favs-header-title {
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tm-favs-count-badge {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #00f0ff;
+  background: rgba(0, 240, 255, 0.12);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  padding: 2px 7px;
+  border-radius: 10px;
+  font-family: monospace;
+}
+
+.tm-favs-list {
+  max-height: 290px !important;
+}
+
+.tm-fav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 14px 9px 12px;
+  border-bottom: 1px solid #16161f;
+  border-left: 2px solid transparent;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease;
+  position: relative;
+  background: transparent;
+}
+
+.tm-fav-item:hover {
+  background: #171722;
+  border-left-color: #00f0ff;
+}
+
+.tm-fav-item.active {
+  background: #1d1d2c;
+  border-left-color: #05ffa1;
+}
+
+.tm-fav-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  overflow: hidden;
+  flex: 1;
+  padding-right: 8px;
+  min-width: 0;
+}
+
+.tm-fav-video-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+}
+
+.tm-fav-video-name {
+  font-size: 9.5px;
+  color: #71717a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 600;
+}
+
+.tm-fav-here-badge {
+  display: inline-block;
+  font-size: 8px;
+  font-weight: 800;
+  color: #05ffa1;
+  background: rgba(5, 255, 161, 0.15);
+  border: 1px solid rgba(5, 255, 161, 0.4);
+  padding: 1px 4px;
+  border-radius: 3px;
+  letter-spacing: 0.4px;
+}
+
+.tm-fav-track-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: #f4f4f5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+}
+
+.tm-fav-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tm-fav-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 `;
