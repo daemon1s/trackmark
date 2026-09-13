@@ -25,7 +25,13 @@ export class StateManager {
       this.videoController.attachToVideo();
       this.videoController.setVideoId(videoId);
       if (videoId) {
+        this.currentVideoData = null;
+        this.videoController.setActiveTrack(null);
+        this.videoController.setLoop(false);
+        this.notify();
+
         setTimeout(async () => {
+          if (this.spaNavigator.getVideoId() !== videoId) return;
           this.videoController.attachToVideo();
           await this.loadVideoData(videoId);
         }, 150);
@@ -34,6 +40,12 @@ export class StateManager {
         this.videoController.setActiveTrack(null);
         this.videoController.setLoop(false);
         this.notify();
+      }
+    });
+
+    this.spaNavigator.onMetadataChange(async (videoId) => {
+      if (videoId) {
+        await this.syncVideoMetadata(videoId);
       }
     });
 
@@ -46,13 +58,14 @@ export class StateManager {
 
   public async loadVideoData(videoId: string): Promise<VideoData> {
     let data = await StorageManager.getVideoData(videoId);
-    const videoTitle = this.extractVideoTitle();
     const duration = this.videoController.getDuration();
+    const isReady = this.isDOMReadyForVideo(videoId);
+    const extractedTitle = isReady ? this.extractVideoTitle() : '';
 
     if (!data) {
       data = {
         videoId,
-        videoTitle,
+        videoTitle: (extractedTitle && extractedTitle !== 'YouTube Video') ? extractedTitle : 'YouTube Video',
         duration,
         tracks: [],
         activeTrackId: null,
@@ -60,8 +73,8 @@ export class StateManager {
         lastUpdated: Date.now()
       };
     } else {
-      if (videoTitle && data.videoTitle !== videoTitle) {
-        data.videoTitle = videoTitle;
+      if ((!data.videoTitle || data.videoTitle === 'YouTube Video') && extractedTitle && extractedTitle !== 'YouTube Video') {
+        data.videoTitle = extractedTitle;
       }
     }
 
@@ -227,6 +240,38 @@ export class StateManager {
 
   public getVideoData(): VideoData | null {
     return this.currentVideoData;
+  }
+
+  public async syncVideoMetadata(videoId: string): Promise<void> {
+    if (!this.currentVideoData || this.currentVideoData.videoId !== videoId) {
+      return;
+    }
+
+    if (!this.isDOMReadyForVideo(videoId)) {
+      return;
+    }
+
+    const freshTitle = this.extractVideoTitle();
+    if (!freshTitle || freshTitle === 'YouTube Video' || freshTitle === 'YouTube') {
+      return;
+    }
+
+    if (this.currentVideoData.videoTitle !== freshTitle) {
+      this.currentVideoData.videoTitle = freshTitle;
+      await StorageManager.saveVideoData(this.currentVideoData);
+      this.notify();
+    }
+  }
+
+  private isDOMReadyForVideo(videoId: string): boolean {
+    const watchFlexy = document.querySelector('ytd-watch-flexy');
+    if (watchFlexy) {
+      const flexyVideoId = watchFlexy.getAttribute('video-id');
+      if (flexyVideoId && flexyVideoId !== videoId) {
+        return false;
+      }
+    }
+    return this.spaNavigator.getVideoId() === videoId;
   }
 
   private extractVideoTitle(): string {

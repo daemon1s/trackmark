@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "tsup --watch --onSuccess \"node scripts/copy-assets.js\"",
     "build": "tsup && node scripts/copy-assets.js",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/title-sync.test.ts"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.260",

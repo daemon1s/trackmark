@@ -1,9 +1,13 @@
 export type VideoChangeCallback = (videoId: string | null, prevVideoId: string | null) => void;
+export type MetadataChangeCallback = (videoId: string | null) => void;
 
 export class SPANavigator {
   private currentVideoId: string | null = null;
   private listeners: VideoChangeCallback[] = [];
+  private metadataListeners: MetadataChangeCallback[] = [];
   private pollTimer: number | null = null;
+
+  private lastMetaNotificationTime: number = 0;
 
   constructor() {
     this.initListeners();
@@ -27,15 +31,35 @@ export class SPANavigator {
     };
   }
 
+  public onMetadataChange(callback: MetadataChangeCallback): () => void {
+    this.metadataListeners.push(callback);
+    return () => {
+      this.metadataListeners = this.metadataListeners.filter(cb => cb !== callback);
+    };
+  }
+
   private initListeners(): void {
     this.currentVideoId = this.getVideoId();
 
     const check = (source: string) => this.checkVideoChange(source);
+    const notifyMeta = () => {
+      const now = Date.now();
+      if (now - this.lastMetaNotificationTime < 50) return;
+      this.lastMetaNotificationTime = now;
+      const vid = this.getVideoId();
+      this.metadataListeners.forEach(cb => cb(vid));
+    };
 
     window.addEventListener('yt-navigate-finish', () => check('yt-navigate-finish'));
     document.addEventListener('yt-navigate-finish', () => check('doc-yt-navigate-finish'));
-    window.addEventListener('yt-page-data-updated', () => check('yt-page-data-updated'));
-    document.addEventListener('yt-page-data-updated', () => check('doc-yt-page-data-updated'));
+    window.addEventListener('yt-page-data-updated', () => {
+      check('yt-page-data-updated');
+      notifyMeta();
+    });
+    document.addEventListener('yt-page-data-updated', () => {
+      check('doc-yt-page-data-updated');
+      notifyMeta();
+    });
     window.addEventListener('popstate', () => check('popstate'));
 
     this.pollTimer = window.setInterval(() => {
@@ -59,5 +83,7 @@ export class SPANavigator {
       this.pollTimer = null;
     }
     this.listeners = [];
+    this.metadataListeners = [];
   }
 }
+

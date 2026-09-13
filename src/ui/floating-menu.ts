@@ -1054,7 +1054,7 @@ export class FloatingMenu {
       countBadge.textContent = `${favorites.length} track${favorites.length === 1 ? '' : 's'}`;
     }
 
-    const signature = favorites.map(f => `${f.videoId}:${f.track.id}:${f.track.updatedAt || 0}:${f.track.isFavorite}`).join('|');
+    const signature = favorites.map(f => `${f.videoId}:${f.videoTitle}:${f.track.id}:${f.track.updatedAt || 0}:${f.track.isFavorite}`).join('|');
     if (signature === this.lastFavsSignature && listEl.children.length > 0) {
       this.updateActiveFavItemStyles();
       return;
